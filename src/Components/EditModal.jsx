@@ -1,61 +1,61 @@
-import { Modal, Button, Form } from 'react-bootstrap'
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { editUser, fetchProfile } from '../redux/actions'
-import { BsPencil } from 'react-icons/bs'
-import axios from 'axios'
+import { Modal, Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { editUser, fetchProfile } from "../redux/actions";
+import { BsPencil } from "react-icons/bs";
+import axios from "axios";
 
 function EditModal({ data }) {
-  const dispatch = useDispatch()
-  const usersData = useSelector((state) => state.user.currentUser)
+  const dispatch = useDispatch();
+  const usersData = useSelector((state) => state.user.currentUser);
 
-  const [show, setShow] = useState(false)
-  const [name, setname] = useState(usersData.name)
-  const [email, setemail] = useState(usersData.email)
-  const [surname, setsurname] = useState(usersData.surname)
-  const [title, settitle] = useState(usersData.title)
-  const [bio, setbio] = useState(usersData.bio)
-  const [area, setarea] = useState(usersData.area)
-  const [selectedFile, setselectedFile] = useState()
-  const [isFilePicked, setisFilePicked] = useState(false)
+  const [show, setShow] = useState(false);
+  const [name, setname] = useState(usersData.name);
+  const [email, setemail] = useState(usersData.email);
+  const [surname, setsurname] = useState(usersData.surname);
+  const [title, settitle] = useState(usersData.title);
+  const [bio, setbio] = useState(usersData.bio);
+  const [area, setarea] = useState(usersData.area);
+  const [selectedFile, setselectedFile] = useState();
+  const [isFilePicked, setisFilePicked] = useState(false);
 
   const changeFileHandler = (event) => {
-    setselectedFile(event.target.files[0])
-    setisFilePicked(true)
-  }
+    setselectedFile(event.target.files[0]);
+    setisFilePicked(true);
+  };
 
   const handleEditName = (event) => {
-    setname(event.target.value)
-    console.log(name)
-  }
+    setname(event.target.value);
+    console.log(name);
+  };
 
   const handleEditSurname = (event) => {
-    setsurname(event.target.value)
-    console.log(surname)
-  }
+    setsurname(event.target.value);
+    console.log(surname);
+  };
 
   const handleEditEmail = (event) => {
-    setemail(event.target.value)
-    console.log(email)
-  }
+    setemail(event.target.value);
+    console.log(email);
+  };
 
   const handleEditTitle = (event) => {
-    settitle(event.target.value)
-    console.log(title)
-  }
+    settitle(event.target.value);
+    console.log(title);
+  };
 
   const handleEditBio = (event) => {
-    setbio(event.target.value)
-    console.log(bio)
-  }
+    setbio(event.target.value);
+    console.log(bio);
+  };
 
   const handleEditArea = (event) => {
-    setarea(event.target.value)
-    console.log(area)
-  }
+    setarea(event.target.value);
+    console.log(area);
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const user = {
       name: name,
@@ -66,56 +66,59 @@ function EditModal({ data }) {
       bio: bio,
       area: area,
       image: usersData.image,
-    }
-    console.log(user)
-    console.log('We are editing users here')
+    };
+    console.log(user);
+    console.log("We are editing users here");
 
     const options = {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(user),
       headers: {
-        'Content-type': 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
+        "Content-type": "application/json",
+        // Authorization:
+        //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
-    }
-    const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/'
+    };
+    // const fetchURL = `${process.env.REACT_APP_BE_URL}/users/63ce71322d24291c669fab27`;
+    const fetchURL = `http://localhost:3001/users/63ce71322d24291c669fab27`;
+    // const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/'
 
     try {
-      let response = await fetch(fetchURL, options)
-      console.log(response)
+      let response = await fetch(fetchURL, options);
+      console.log(response);
+      console.log("-------------------", user);
       if (response.ok) {
-        console.log('Edit was successful')
-        let usersData = await response.json()
+        console.log("Edit was successful");
+        let usersData = await response.json();
 
         if (isFilePicked) {
-          const url = `https://striveschool-api.herokuapp.com/api/profile/${usersData._id}/picture`
-          const formData = new FormData()
-          formData.append('profile', selectedFile)
+          const url = `http://localhost:3001/users/${usersData._id}/picture`;
+          const formData = new FormData();
+          formData.append("userPicture", selectedFile);
           const config = {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'content-Type': 'multipart/form-data',
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
+              "content-Type": "multipart/form-data",
+              // Authorization:
+              //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
             },
-          }
+          };
           axios.post(url, formData, config).then((response) => {
-            console.log(response.data)
-          })
+            console.log(response.data);
+          });
         }
 
-        console.log(usersData)
-        dispatch(fetchProfile())
+        console.log(usersData);
+        dispatch(fetchProfile());
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    handleClose()
-  }
+    handleClose();
+  };
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -168,7 +171,7 @@ function EditModal({ data }) {
         </Modal.Footer>
       </Modal>
     </>
-  )
+  );
 }
 
-export default EditModal
+export default EditModal;
