@@ -37,12 +37,8 @@ const Home = () => {
   const [hasMore, setHasMore] = useState(true)
   const [slice, setSlice] = useState(8)
 
-  //const profilePostsList = useSelector((state) => state.posts.posts.profilePosts.slice().reverse());
-
   const profilePosts = useSelector((state) => state.posts.posts.profilePosts)
   console.log('the posts are: ', postsList)
-  //console.log("the profile posts are: ", profilePostsList);
-  //console.log("the profile posts are: ", reverseProfilePostsList);
 
   useEffect(() => {
     setTimeout(() => {
@@ -87,7 +83,6 @@ const Home = () => {
     dispatch(fetchProfile())
     dispatch(fetchUsers())
     dispatch(fetchPostsList())
-    // dispatch(fetchExperiences(currentUserData._id))
   }, [usersLoaded, profilePosts])
 
   return (
