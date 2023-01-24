@@ -248,12 +248,8 @@ export const fetchPostsList = () => {
     console.log('We are fetching posts here')
     const options = {
       method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
-      },
     }
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/posts/`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts`
 
     try {
       let response = await fetch(fetchURL, options)
