@@ -1,44 +1,43 @@
-import { Navbar, Nav, Form, FormControl, Container } from "react-bootstrap";
-import { SiLinkedin } from "react-icons/si";
-import { GoSearch } from "react-icons/go";
-import { HiHome } from "react-icons/hi";
-import { MdPeopleAlt } from "react-icons/md";
-import { BsBriefcaseFill } from "react-icons/bs";
-import { AiFillMessage } from "react-icons/ai";
-import { FaBell } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import TopNavProfile from "./TopNavProfile";
-import TopNavWork from "./TopNavWork";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { FiDelete } from "react-icons/fi";
-import FormSearchUser from "./FormSearchUser";
-import ClickAwayListener from "@mui/base/ClickAwayListener";
+import { Navbar, Nav, Form, FormControl, Container } from 'react-bootstrap'
+import { SiLinkedin } from 'react-icons/si'
+import { GoSearch } from 'react-icons/go'
+import { HiHome } from 'react-icons/hi'
+import { MdPeopleAlt } from 'react-icons/md'
+import { BsBriefcaseFill } from 'react-icons/bs'
+import { AiFillMessage } from 'react-icons/ai'
+import { FaBell } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import TopNavProfile from './TopNavProfile'
+import TopNavWork from './TopNavWork'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { FiDelete } from 'react-icons/fi'
+import FormSearchUser from './FormSearchUser'
+import ClickAwayListener from '@mui/base/ClickAwayListener'
 /*note that Clickawaylistener is installed for the purpose of detecting the user clicking outside of the search bar. It is in use on this page. I installed it using npm i  */
-import HiddenNav from "./HiddenNav";
+import HiddenNav from './HiddenNav'
 
 const TopNav = () => {
-  const [query, setQuery] = useState("");
-  const [searchSelected, setSearchSelected] = useState(false);
-  const [isQuerySet, setIsQuerySet] = useState(false);
-  const [clearInput, setClearInput] = useState(query);
-  console.log("the query is: ", query);
-  console.log("the input is: ", clearInput);
+  const [query, setQuery] = useState('')
+  const [searchSelected, setSearchSelected] = useState(false)
+  const [isQuerySet, setIsQuerySet] = useState(false)
+  const [clearInput, setClearInput] = useState(query)
+
   const handleQuery = (e) => {
-    setQuery(e.target.value);
-    setIsQuerySet(true);
-  };
+    setQuery(e.target.value)
+    setIsQuerySet(true)
+  }
   const handleClearInput = () => {
     // setClearInput("");
-    setQuery("");
-    setIsQuerySet(false);
-  };
+    setQuery('')
+    setIsQuerySet(false)
+  }
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  const usersList = useSelector((state) => state.user.users);
-  const users = usersList[0];
-  const areUsersLoaded = useSelector((state) => state.user.usersLoaded);
+    e.preventDefault()
+  }
+  const usersList = useSelector((state) => state.user.users)
+  const users = usersList[0]
+  const areUsersLoaded = useSelector((state) => state.user.usersLoaded)
   return (
     <>
       <Navbar expand="lg justify-content-center">
@@ -56,8 +55,8 @@ const TopNav = () => {
                 id="generalSearchArea"
                 className={
                   searchSelected === true
-                    ? "d-flex  align-items-center searchSetSelected"
-                    : "d-flex  align-items-center"
+                    ? 'd-flex  align-items-center searchSetSelected'
+                    : 'd-flex  align-items-center'
                 }
               >
                 <div className="pl-3 pr-2">
@@ -80,7 +79,7 @@ const TopNav = () => {
                     {areUsersLoaded &&
                       users
                         .filter((user) =>
-                          user.name.toLowerCase().startsWith(`${query}`)
+                          user.name.toLowerCase().startsWith(`${query}`),
                         )
                         .slice(0, 10)
                         .map((user) => (
@@ -94,7 +93,7 @@ const TopNav = () => {
                     {areUsersLoaded && (
                       <p
                         className="text-center font-weight-bold"
-                        style={{ borderTop: "solid 1pt #c6c5c3" }}
+                        style={{ borderTop: 'solid 1pt #c6c5c3' }}
                       >
                         <Link>See all results</Link>
                       </p>
@@ -155,7 +154,7 @@ const TopNav = () => {
       </Navbar>
       <HiddenNav />
     </>
-  );
-};
+  )
+}
 
-export default TopNav;
+export default TopNav

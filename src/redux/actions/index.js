@@ -94,26 +94,17 @@ export const setExperiencesLoaded = () => {
 
 export const fetchUsers = () => {
   return async (dispatch, getState) => {
-    console.log('We are fetching users here')
-    console.log('Testing: ', getState())
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
-      },
-    }
-    const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/'
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users`
 
     try {
-      let response = await fetch(fetchURL, options)
-      console.log(response)
+      let response = await fetch(fetchURL)
+
       if (response.ok) {
-        console.log('Fetch Successful')
-        let usersData = await response.json()
-        console.log(usersData)
-        dispatch(userSelectedAction(usersData.reverse()))
-        // dispatch(fetchExperiences(usersData._id))
+        let { users } = await response.json()
+        console.log(users)
+
+        dispatch(userSelectedAction(users.reverse()))
+
         setTimeout(() => {
           dispatch(usersLoaded())
         }, 3000)
@@ -126,23 +117,16 @@ export const fetchUsers = () => {
 
 export const fetchProfile = () => {
   return async (dispatch, getState) => {
-    console.log('We are fetching the current user profile here')
     const options = {
       method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
-      },
     }
-    const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/me'
+    const myProfileId = process.env.REACT_APP_MY_PROFILE_ID
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/me/63ce71322d24291c669fab27`
 
     try {
       let response = await fetch(fetchURL, options)
-      console.log(response)
       if (response.ok) {
-        console.log('Fetch Successful')
         let usersData = await response.json()
-        console.log(usersData)
         dispatch(currentUser(usersData))
       }
     } catch (error) {
@@ -155,22 +139,12 @@ export const fetchExperiences = (userID) => {
   return async (dispatch, getState) => {
     console.log('We are fetching the users experiences here')
     console.log(userID)
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
-      },
-    }
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${userID}/experiences`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${userID}/experiences`
 
     try {
-      let response = await fetch(fetchURL, options)
-      console.log(response)
+      let response = await fetch(fetchURL)
       if (response.ok) {
-        console.log('Fetch Successful')
         let usersExperience = await response.json()
-        console.log(usersExperience)
         dispatch(selectedExperienceAction(usersExperience))
         dispatch(setExperiencesLoaded())
       }
@@ -182,25 +156,26 @@ export const fetchExperiences = (userID) => {
 
 export const editUser = (user) => {
   return async (dispatch, getState) => {
-    console.log('We are editing users here')
     const options = {
       method: 'PUT',
       body: JSON.stringify({ user }),
       headers: {
         'Content-type': 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
+        // Authorization:
+        //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
       },
     }
-    const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/'
+    // const fetchURL = "https://striveschool-api.herokuapp.com/api/profile/";
+    // const fetchURL = `${process.env.REACT_APP_BE_URL}/users/${user._id}`;
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/63ce71322d24291c669fab27`
+    console.log('user._id from editing my profile', user._id)
 
     try {
       let response = await fetch(fetchURL, options)
-      console.log(response)
+
       if (response.ok) {
-        console.log('Edit was successful')
         let usersData = await response.json()
-        console.log(usersData)
+
         dispatch(fetchProfile())
       }
     } catch (error) {
@@ -219,12 +194,11 @@ export const getContactExperiences = (contactId) => {
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
     }
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${contactId}/experiences`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${contactId}/experiences`
 
     try {
       const response = await fetch(fetchURL, options)
       if (response.ok) {
-        console.log("the response for the contact's experiences is:", response)
         let experiences = await response.json()
         console.log("the contact's experiences are:", experiences)
         dispatch(getContactExperiencesAction(experiences))
@@ -245,7 +219,6 @@ export const setPostsLoaded = () => {
 // thunk action fro fetching all the posts
 export const fetchPostsList = () => {
   return async (dispatch, getState) => {
-    console.log('We are fetching posts here')
     const options = {
       method: 'GET',
     }
@@ -253,11 +226,10 @@ export const fetchPostsList = () => {
 
     try {
       let response = await fetch(fetchURL, options)
-      console.log(response)
+
       if (response.ok) {
-        console.log('Fetch Successful')
         let postsList = await response.json()
-        console.log(postsList)
+
         dispatch(getPostsListAction(postsList.reverse()))
         setTimeout(() => {
           dispatch(setPostsLoaded())

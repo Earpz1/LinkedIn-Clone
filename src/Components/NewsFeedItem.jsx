@@ -7,12 +7,18 @@ import { BiRepost } from 'react-icons/bi'
 import { IoIosSend } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import Comments from './Comments'
 
 const NewsFeedItem = ({ post }) => {
   const likes = Math.floor(Math.random() * 200)
 
   const [Likes, setLikes] = useState(likes)
   const [liked, setliked] = useState(false)
+  const [showComments, setshowComments] = useState(false)
+
+  const handleShowComments = () => {
+    setshowComments(true)
+  }
 
   const handleLikes = () => {
     if (liked) {
@@ -59,24 +65,25 @@ const NewsFeedItem = ({ post }) => {
           >
             {post.text}
           </div>
-          <div style={{ width: '100%' }}>
-            <img
-              className="mb-3 img-fluid"
-              src={
-                post.image ? `${post.image}` : 'https://picsum.photos/505/300'
-              }
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
+
+          {post.image !== '' && (
+            <div style={{ width: '100%' }}>
+              <img
+                className="mb-3 img-fluid"
+                src={`${post.image}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+          )}
           <div className="d-flex mt-2 ml-2 justify-content-between w-100">
             <div>
               <AiFillLike className="like-icon" />
               {Likes}
             </div>
             <div>
-              <a href="#" className="commentLink">
+              <div className="commentLink" onClick={handleShowComments}>
                 <small className="mr-3">1 Comment</small>
-              </a>
+              </div>
             </div>
           </div>
           <hr className="bottom-post-divider" />
@@ -95,6 +102,7 @@ const NewsFeedItem = ({ post }) => {
             </span>
           </div>
         </Row>
+        {showComments && <Comments post={post} />}
       </div>
     </>
   )
