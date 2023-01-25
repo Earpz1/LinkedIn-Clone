@@ -17,7 +17,11 @@ const NewsFeedItem = ({ post }) => {
   const [showComments, setshowComments] = useState(false)
 
   const handleShowComments = () => {
-    setshowComments(true)
+    if (showComments === true) {
+      setshowComments(false)
+    } else {
+      setshowComments(true)
+    }
   }
 
   const handleLikes = () => {
