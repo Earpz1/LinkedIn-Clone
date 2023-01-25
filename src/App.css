@@ -640,6 +640,13 @@ span {
   border-radius: 50%;
 }
 
+.commentsAvatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
 .bottom-post-divider {
   border: 0;
   width: 100%;
@@ -663,6 +670,8 @@ span {
 
 .commentLink:hover {
   color: black;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .new-post-button {

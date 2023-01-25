@@ -7,12 +7,18 @@ import { BiRepost } from 'react-icons/bi'
 import { IoIosSend } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import Comments from './Comments'
 
 const NewsFeedItem = ({ post }) => {
   const likes = Math.floor(Math.random() * 200)
 
   const [Likes, setLikes] = useState(likes)
   const [liked, setliked] = useState(false)
+  const [showComments, setshowComments] = useState(false)
+
+  const handleShowComments = () => {
+    setshowComments(true)
+  }
 
   const handleLikes = () => {
     if (liked) {
@@ -75,9 +81,9 @@ const NewsFeedItem = ({ post }) => {
               {Likes}
             </div>
             <div>
-              <a href="#" className="commentLink">
+              <div className="commentLink" onClick={handleShowComments}>
                 <small className="mr-3">1 Comment</small>
-              </a>
+              </div>
             </div>
           </div>
           <hr className="bottom-post-divider" />
@@ -96,6 +102,7 @@ const NewsFeedItem = ({ post }) => {
             </span>
           </div>
         </Row>
+        {showComments && <Comments post={post} />}
       </div>
     </>
   )
