@@ -59,15 +59,16 @@ const NewsFeedItem = ({ post }) => {
           >
             {post.text}
           </div>
-          <div style={{ width: '100%' }}>
-            <img
-              className="mb-3 img-fluid"
-              src={
-                post.image ? `${post.image}` : 'https://picsum.photos/505/300'
-              }
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
+
+          {post.image !== '' && (
+            <div style={{ width: '100%' }}>
+              <img
+                className="mb-3 img-fluid"
+                src={`${post.image}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+          )}
           <div className="d-flex mt-2 ml-2 justify-content-between w-100">
             <div>
               <AiFillLike className="like-icon" />
