@@ -192,7 +192,7 @@ export const getContactExperiences = (contactId) => {
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
       },
     };
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${contactId}/experiences`;
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${contactId}/experiences`;
 
     try {
       const response = await fetch(fetchURL, options);
