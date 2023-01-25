@@ -27,8 +27,6 @@ function AddNewPost() {
   const [isFilePicked, setisFilePicked] = useState(false)
   const currentUserData = useSelector((state) => state.user.currentUser)
 
-  console.log('we are currently posting: ', postText)
-
   const handleEmojiShow = () => {
     if (showEmoji) {
       setShowEmoji(false)
@@ -53,8 +51,6 @@ function AddNewPost() {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    console.log('We are posting here')
-
     const post = {
       text: postText,
     }
@@ -72,10 +68,8 @@ function AddNewPost() {
 
     try {
       let response = await fetch(fetchURL, options)
-      console.log(response)
 
       if (response.ok) {
-        console.log('Post was successful: ', response)
         const post = await response.json()
 
         if (isFilePicked) {
@@ -89,12 +83,9 @@ function AddNewPost() {
                 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
             },
           }
-          axios.post(url, formData, config).then((response) => {
-            console.log(response.data)
-          })
+          axios.post(url, formData, config).then((response) => {})
         }
 
-        console.log('the post is: ', post._id)
         dispatch(profilePostsListAction(post))
       }
     } catch (error) {
