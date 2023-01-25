@@ -125,12 +125,9 @@ export const fetchProfile = () => {
   return async (dispatch, getState) => {
     const options = {
       method: 'GET',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
-      },
     }
-    const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/me'
+    const fetchURL =
+      'https://fs0422-epicode-build-week-4-production.up.railway.app/users/me/63ce71322d24291c669fab27'
 
     try {
       let response = await fetch(fetchURL, options)
