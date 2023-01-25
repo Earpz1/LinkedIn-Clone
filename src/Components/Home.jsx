@@ -85,8 +85,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchProfile())
     dispatch(fetchUsers())
+    dispatch(fetchProfile())
     dispatch(fetchPostsList())
-    // dispatch(fetchExperiences(currentUserData._id))
   }, [usersLoaded, profilePosts])
 
   return (

@@ -1,124 +1,134 @@
-import { Modal, Button, Row, Container, Form } from "react-bootstrap";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { editUser, fetchProfile, fetchExperiences } from "../redux/actions";
-import { BsPlus, BsEmojiSmile, BsFillImageFill, BsCameraVideoFill, BsFillFileArrowUpFill } from "react-icons/bs";
-import { IoEarth } from "react-icons/io5";
-import { AiFillCaretDown } from "react-icons/ai";
-import { FaEllipsisH } from "react-icons/fa";
-import EmojiPicker from "emoji-picker-react";
-import { profilePostsListAction, getCurrentPostAction, fetchPostsList } from "../redux/actions";
-import { BsPencil } from "react-icons/bs";
-import { useEffect } from "react";
+import { Modal, Button, Row, Container, Form } from 'react-bootstrap'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { editUser, fetchProfile, fetchExperiences } from '../redux/actions'
+import {
+  BsPlus,
+  BsEmojiSmile,
+  BsFillImageFill,
+  BsCameraVideoFill,
+  BsFillFileArrowUpFill,
+} from 'react-icons/bs'
+import { IoEarth } from 'react-icons/io5'
+import { AiFillCaretDown } from 'react-icons/ai'
+import { FaEllipsisH } from 'react-icons/fa'
+import EmojiPicker from 'emoji-picker-react'
+import {
+  profilePostsListAction,
+  getCurrentPostAction,
+  fetchPostsList,
+} from '../redux/actions'
+import { BsPencil } from 'react-icons/bs'
+import { useEffect } from 'react'
 
 function EditPost({ post }) {
-  const dispatch = useDispatch();
-  const currentPost = useSelector((state) => state.posts.posts.currentPost);
-  const postsList = useSelector((state) => state.posts.posts.postsList);
-  console.log("the current post is: ", currentPost);
+  const dispatch = useDispatch()
+  const currentPost = useSelector((state) => state.posts.posts.currentPost)
+  const postsList = useSelector((state) => state.posts.posts.postsList)
+  console.log('the current post is: ', currentPost)
 
-  const [show, setShow] = useState(false);
-  const [showEmoji, setShowEmoji] = useState(false);
-  const [postText, setPostText] = useState("");
-  const [isUpdated, setIsUpdated] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [show, setShow] = useState(false)
+  const [showEmoji, setShowEmoji] = useState(false)
+  const [postText, setPostText] = useState('')
+  const [isUpdated, setIsUpdated] = useState(false)
+  const [isDeleted, setIsDeleted] = useState(false)
 
   useEffect(() => {
-    fetchPostsList();
-    setIsUpdated(false);
-    setIsDeleted(false);
-  }, [isUpdated, isDeleted, postsList]);
+    fetchPostsList()
+    setIsUpdated(false)
+    setIsDeleted(false)
+  }, [isUpdated, isDeleted, postsList])
 
-  console.log("we are currently posting: ", postText);
+  console.log('we are currently posting: ', postText)
 
   const handleEmojiShow = () => {
     if (showEmoji) {
-      setShowEmoji(false);
+      setShowEmoji(false)
     } else {
-      setShowEmoji(true);
+      setShowEmoji(true)
     }
-  };
+  }
 
   const handlePostText = (e) => {
-    setPostText(e.target.value);
-  };
+    setPostText(e.target.value)
+  }
 
   const handlePut = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    console.log("We are editing posts here");
-    const postId = post._id;
+    console.log('We are editing posts here')
+    const postId = post._id
     const editedPost = {
       text: postText,
-    };
+    }
 
     const options = {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify(editedPost),
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
-    };
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/posts/${postId}`;
+    }
+    const fetchURL = `https://striveschool-api.herokuapp.com/api/posts/${postId}`
 
     try {
-      let response = await fetch(fetchURL, options);
-      console.log(response);
+      let response = await fetch(fetchURL, options)
+      console.log(response)
 
       if (response.ok) {
-        console.log("Post was successful");
-        const updatedPost = await response.json();
-        console.log("the updated post is: ", updatedPost);
-        dispatch(getCurrentPostAction(updatedPost));
-        setIsUpdated(true);
+        console.log('Post was successful')
+        const updatedPost = await response.json()
+        console.log('the updated post is: ', updatedPost)
+        dispatch(getCurrentPostAction(updatedPost))
+        setIsUpdated(true)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    handleClose();
-  };
+    handleClose()
+  }
 
   const handleDelete = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    console.log("we're deleting one post at a time");
-    const postId = post._id;
+    console.log("we're deleting one post at a time")
+    const postId = post._id
 
     const options = {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
-    };
+    }
 
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/posts/${postId}`;
+    const fetchURL = `https://striveschool-api.herokuapp.com/api/posts/${postId}`
 
     try {
-      let response = await fetch(fetchURL, options);
+      let response = await fetch(fetchURL, options)
       if (response.ok) {
-        console.log("Post deleted successfully");
-        const deletedPost = await response.json();
-        console.log("the deleted post is: ", deletedPost);
-        setIsDeleted(true);
+        console.log('Post deleted successfully')
+        const deletedPost = await response.json()
+        console.log('the deleted post is: ', deletedPost)
+        setIsDeleted(true)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    handleClose();
-  };
+    handleClose()
+  }
 
   const handleClose = () => {
-    setShow(false);
+    setShow(false)
     // setPostText("");
-  };
+  }
   const handleShow = () => {
-    setShow(true);
+    setShow(true)
     // dispatch(getCurrentPostAction());
-  };
+  }
 
   return (
     <>
@@ -159,8 +169,17 @@ function EditPost({ post }) {
                 />
               </Form.Group>
 
-              <BsEmojiSmile onClick={handleEmojiShow} className="emoji-picker" />
-              {showEmoji && <EmojiPicker searchDisabled="true" skinTonesDisabled="true" showPreview="false" />}
+              <BsEmojiSmile
+                onClick={handleEmojiShow}
+                className="emoji-picker"
+              />
+              {showEmoji && (
+                <EmojiPicker
+                  searchDisabled="true"
+                  skinTonesDisabled="true"
+                  showPreview="false"
+                />
+              )}
             </Row>
           </Container>
         </Modal.Body>
@@ -176,7 +195,11 @@ function EditPost({ post }) {
             <Button type="Submit" variant="warning" onClick={handlePut}>
               Save
             </Button>
-            <Button type="Submit" variant="outline-danger" onClick={handleDelete}>
+            <Button
+              type="Submit"
+              variant="outline-danger"
+              onClick={handleDelete}
+            >
               Delete
             </Button>
           </Row>
@@ -198,7 +221,7 @@ function EditPost({ post }) {
         </Modal.Footer>
       </Modal> */}
     </>
-  );
+  )
 }
 
-export default EditPost;
+export default EditPost
