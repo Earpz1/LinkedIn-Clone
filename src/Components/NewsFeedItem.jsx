@@ -11,6 +11,7 @@ import Comments from './Comments'
 
 const NewsFeedItem = ({ post }) => {
   const likes = Math.floor(Math.random() * 200)
+  console.log(post)
 
   const [Likes, setLikes] = useState(likes)
   const [liked, setliked] = useState(false)
@@ -86,7 +87,9 @@ const NewsFeedItem = ({ post }) => {
             </div>
             <div>
               <div className="commentLink" onClick={handleShowComments}>
-                <small className="mr-3">1 Comment</small>
+                <small className="mr-3">
+                  {post.comments.length} comment(s)
+                </small>
               </div>
             </div>
           </div>
@@ -95,7 +98,10 @@ const NewsFeedItem = ({ post }) => {
             <span className="footer-icons-new-post" onClick={handleLikes}>
               {liked ? <AiFillLike /> : <AiOutlineLike />} Like
             </span>
-            <span className="footer-icons-new-post">
+            <span
+              className="footer-icons-new-post"
+              onClick={handleShowComments}
+            >
               <FaRegCommentDots /> Comment
             </span>
             <span className="footer-icons-new-post">
