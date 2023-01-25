@@ -142,7 +142,7 @@ export const fetchExperiences = (userID) => {
     console.log("We are fetching the users experiences here");
     console.log(userID);
 
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${userID}/experiences`;
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${userID}/experiences`;
 
     try {
       let response = await fetch(fetchURL);

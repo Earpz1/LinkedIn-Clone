@@ -1,16 +1,18 @@
-import { Badge } from 'react-bootstrap'
-import { RxDividerVertical } from 'react-icons/rx'
-import EditModal from './EditModal'
-import { useSelector } from 'react-redux'
-import { format } from 'date-fns'
-import EditExperienceModal from './EditExperienceModal'
-import AddExperience from './AddExperience'
-import { useState } from 'react'
+import { Badge } from "react-bootstrap";
+import { RxDividerVertical } from "react-icons/rx";
+import EditModal from "./EditModal";
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
+import EditExperienceModal from "./EditExperienceModal";
+import AddExperience from "./AddExperience";
+import { useState } from "react";
 
 const ExperienceItem = ({ data }) => {
-  const [hasImage, sethasImage] = useState(data.image)
-  const me = useSelector((state) => state.user.currentUser)
-  const meId = me._id
+  const [hasImage, sethasImage] = useState(data.image);
+  const me = useSelector((state) => state.user.currentUser);
+  const meId = me._id;
+  console.log(meId);
+  console.log(data._id);
 
   return (
     <div id="profileContainer">
@@ -29,31 +31,17 @@ const ExperienceItem = ({ data }) => {
         {meId !== data._id ? (
           <>
             <div className="d-flex">
-              <div className="companylogo">
-                {hasImage && (
-                  <img
-                    src={data.image}
-                    alt="company logo"
-                    className="img-fluid"
-                  />
-                )}
-              </div>
+              <div className="companylogo">{hasImage && <img src={data.image} alt="company logo" className="img-fluid" />}</div>
               <div className="pl-2">
                 <p>
                   <small>Role:</small>
-                  <Badge variant="light">{data.role}</Badge>{' '}
-                  <RxDividerVertical /> <small>Company:</small>
+                  <Badge variant="light">{data.role}</Badge> <RxDividerVertical /> <small>Company:</small>
                   <Badge variant="light">{data.company}</Badge>
                 </p>
                 <p>
                   <small>Date:</small>
-                  <Badge variant="light">
-                    {format(new Date(data.startDate), 'MMM yyyy')}
-                  </Badge>{' '}
-                  -{' '}
-                  <Badge variant="light">
-                    {format(new Date(data.endDate), 'MMM yyyy')}
-                  </Badge>
+                  <Badge variant="light">{format(new Date(data.startDate), "MMM yyyy")}</Badge> -<small>endDate:</small>
+                  <Badge variant="light">{format(new Date(data.endDate), "MMM yyyy")}</Badge>
                 </p>
                 <p>{data.description}</p>
               </div>
@@ -63,23 +51,20 @@ const ExperienceItem = ({ data }) => {
           <>
             <div>
               <div className="companylogo">
-                <img
-                  src="https://www.pngitem.com/pimgs/m/189-1895934_i-clipart-building-clipart-of-a-building-hd.png"
-                  alt="company logo"
-                  className="img-fluid"
-                />
+                <img src="https://www.pngitem.com/pimgs/m/189-1895934_i-clipart-building-clipart-of-a-building-hd.png" alt="company logo" className="img-fluid" />
               </div>
               <div>
                 <p>
                   <small>Role:</small>
-                  <Badge variant="light">{data.role}</Badge>{' '}
-                  <RxDividerVertical /> <small>Company:</small>
+                  <Badge variant="light">{data.role}</Badge> <RxDividerVertical /> <small>Company:</small>
                   <Badge variant="light">{data.company}</Badge>
                 </p>
                 <p>
                   <small>Date:</small>
-                  <Badge variant="light">{data.startDate}</Badge> -{' '}
-                  <Badge variant="light">{data.endDate}</Badge>
+                  <Badge variant="light">{format(new Date(data.startDate), "MMM yyyy")}</Badge>
+
+                  <small>EndDate:</small>
+                  <Badge variant="light">{format(new Date(data.endDate), "MMM yyyy")}</Badge>
                 </p>
                 <p>
                   <Badge variant="dark">{data.description}</Badge>
@@ -90,6 +75,6 @@ const ExperienceItem = ({ data }) => {
         )}
       </div>
     </div>
-  )
-}
-export default ExperienceItem
+  );
+};
+export default ExperienceItem;
