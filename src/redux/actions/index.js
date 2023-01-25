@@ -104,6 +104,7 @@ export const fetchUsers = () => {
 
       if (response.ok) {
         let { users } = await response.json()
+        console.log(users)
 
         dispatch(userSelectedAction(users.reverse()))
 
@@ -123,7 +124,7 @@ export const fetchProfile = () => {
       method: 'GET',
     }
     const myProfileId = process.env.REACT_APP_MY_PROFILE_ID
-    const fetchURL = `${process.env.REACT_APP_BE_URL}/users/me/${myProfileId}`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/me/63ce71322d24291c669fab27`
 
     try {
       let response = await fetch(fetchURL, options)
@@ -176,7 +177,7 @@ export const editUser = (user) => {
     }
     // const fetchURL = "https://striveschool-api.herokuapp.com/api/profile/";
     // const fetchURL = `${process.env.REACT_APP_BE_URL}/users/${user._id}`;
-    const fetchURL = `${process.env.REACT_APP_BE_URL}/users/63ce71322d24291c669fab27`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/63ce71322d24291c669fab27`
     console.log('user._id from editing my profile', user._id)
 
     try {
