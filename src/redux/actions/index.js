@@ -94,19 +94,23 @@ export const setExperiencesLoaded = () => {
 
 export const fetchUsers = () => {
   return async (dispatch, getState) => {
-    const options = {
-      method: "GET",
-    };
+    const baseUrl = process.env.REACT_APP_BE_URL
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users`
+  
     const fetchURL = "https://fs0422-epicode-build-week-4-production.up.railway.app/users/";
+   
 
     try {
-      let response = await fetch(fetchURL, options);
+      let response = await fetch(fetchURL);
 
       if (response.ok) {
-        let usersData = await response.json();
 
-        dispatch(userSelectedAction(usersData.reverse()));
-        // dispatch(fetchExperiences(usersData._id))
+        let { users } = await response.json()
+        console.log(users)
+
+        dispatch(userSelectedAction(users.reverse()))
+
+
         setTimeout(() => {
           dispatch(usersLoaded());
         }, 3000);
@@ -120,9 +124,11 @@ export const fetchUsers = () => {
 export const fetchProfile = () => {
   return async (dispatch, getState) => {
     const options = {
-      method: "GET",
-    };
-    const fetchURL = "https://fs0422-epicode-build-week-4-production.up.railway.app/users/me/63ce71322d24291c669fab27";
+      method: 'GET',
+    }
+    const myProfileId = process.env.REACT_APP_MY_PROFILE_ID
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/me/63ce71322d24291c669fab27`
+
 
     try {
       let response = await fetch(fetchURL, options);
@@ -161,12 +167,16 @@ export const editUser = (user) => {
       method: "PUT",
       body: JSON.stringify({ user }),
       headers: {
-        "Content-type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
+
+        'Content-type': 'application/json',
+        // Authorization:
+        //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
       },
-    };
-    const fetchURL = "https://striveschool-api.herokuapp.com/api/profile/";
+    }
+    // const fetchURL = "https://striveschool-api.herokuapp.com/api/profile/";
+    // const fetchURL = `${process.env.REACT_APP_BE_URL}/users/${user._id}`;
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/63ce71322d24291c669fab27`
+    console.log('user._id from editing my profile', user._id)
 
     try {
       let response = await fetch(fetchURL, options);

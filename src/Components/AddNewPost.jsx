@@ -54,7 +54,7 @@ function AddNewPost() {
     const post = {
       text: postText,
       username: 'Prince_Moore',
-      image: 'http://placeimg.com/640/480',
+      image: '',
       user: {
         _id: currentUserData._id,
       },
@@ -77,14 +77,12 @@ function AddNewPost() {
         const post = await response.json()
 
         if (isFilePicked) {
-          const url = `https://striveschool-api.herokuapp.com/api/posts/${post._id}`
+          const url = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts/${post._id}/uploadPostImage`
           const formData = new FormData()
-          formData.append('post', selectedFile)
+          formData.append('postPhoto', selectedFile)
           const config = {
             headers: {
               'content-Type': 'multipart/form-data',
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
             },
           }
           axios.post(url, formData, config).then((response) => {})
