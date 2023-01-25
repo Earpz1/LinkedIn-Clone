@@ -95,7 +95,7 @@ export const setExperiencesLoaded = () => {
 export const fetchUsers = () => {
   return async (dispatch, getState) => {
     const baseUrl = process.env.REACT_APP_BE_URL
-    const fetchURL = `${baseUrl}/users`
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users`
     const options = {
       method: 'GET',
     }
