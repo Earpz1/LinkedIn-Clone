@@ -87,8 +87,6 @@ function EditModal({ data }) {
       body: JSON.stringify(user),
       headers: {
         'Content-type': 'application/json',
-        // Authorization:
-        //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
     }
     const fetchURL = `${process.env.REACT_APP_BE_URL}users/63ce71322d24291c669fab27`
@@ -110,8 +108,6 @@ function EditModal({ data }) {
             method: 'POST',
             headers: {
               'content-Type': 'multipart/form-data',
-              // Authorization:
-              //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
             },
           }
           axios.post(url, formData, config).then((response) => {
