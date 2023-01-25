@@ -106,8 +106,7 @@ export const fetchUsers = () => {
       if (response.ok) {
         let usersData = await response.json()
 
-        dispatch(userSelectedAction(usersData.reverse()))
-        // dispatch(fetchExperiences(usersData._id))
+        dispatch(userSelectedAction(usersData.users.reverse()))
         setTimeout(() => {
           dispatch(usersLoaded())
         }, 3000)
