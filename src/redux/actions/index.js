@@ -97,15 +97,15 @@ export const fetchUsers = () => {
     const baseUrl = process.env.REACT_APP_BE_URL;
     const fetchURL = `${baseUrl}/users`;
     const options = {
-      method: 'GET',
-    }
+      method: "GET",
+    };
     try {
-      let response = await fetch(fetchURL, options)
+      let response = await fetch(fetchURL, options);
 
       if (response.ok) {
         let { users } = await response.json();
 
-        dispatch(userSelectedAction(users.reverse()))
+        dispatch(userSelectedAction(users.reverse()));
 
         setTimeout(() => {
           dispatch(usersLoaded());
@@ -130,6 +130,7 @@ export const fetchProfile = () => {
       if (response.ok) {
         let usersData = await response.json();
         dispatch(currentUser(usersData));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -140,21 +141,16 @@ export const fetchExperiences = (userID) => {
   return async (dispatch, getState) => {
     console.log("We are fetching the users experiences here");
     console.log(userID);
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
-      },
-    };
+
     const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${userID}/experiences`;
 
     try {
-      let response = await fetch(fetchURL, options)
+      let response = await fetch(fetchURL);
       if (response.ok) {
-        let usersExperience = await response.json()
-        dispatch(selectedExperienceAction(usersExperience))
-        dispatch(setExperiencesLoaded())
+        let usersExperience = await response.json();
+        dispatch(selectedExperienceAction(usersExperience));
+        dispatch(setExperiencesLoaded());
+        console.log(usersExperience);
       }
     } catch (error) {
       console.log(error);
@@ -179,12 +175,12 @@ export const editUser = (user) => {
     console.log("user._id from editing my profile", user._id);
 
     try {
-      let response = await fetch(fetchURL, options)
+      let response = await fetch(fetchURL, options);
 
       if (response.ok) {
-        let usersData = await response.json()
+        let usersData = await response.json();
 
-        dispatch(fetchProfile())
+        dispatch(fetchProfile());
       }
     } catch (error) {
       console.log(error);
@@ -195,21 +191,15 @@ export const editUser = (user) => {
 export const getContactExperiences = (contactId) => {
   return async (dispatch, getState) => {
     console.log("getting all the contact's experiences");
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
-      },
-    };
-    const fetchURL = `https://striveschool-api.herokuapp.com/api/profile/${contactId}/experiences`;
+
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${contactId}/experiences`;
 
     try {
-      const response = await fetch(fetchURL, options);
+      const response = await fetch(fetchURL);
       if (response.ok) {
-        let experiences = await response.json()
-        console.log("the contact's experiences are:", experiences)
-        dispatch(getContactExperiencesAction(experiences))
+        let experiences = await response.json();
+        console.log("the contact's experiences are:", experiences);
+        dispatch(getContactExperiencesAction(experiences));
       }
     } catch (error) {
       console.log(error);
@@ -228,17 +218,17 @@ export const setPostsLoaded = () => {
 export const fetchPostsList = () => {
   return async (dispatch, getState) => {
     const options = {
-      method: 'GET',
-    }
-    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts`
+      method: "GET",
+    };
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts`;
 
     try {
-      let response = await fetch(fetchURL, options)
+      let response = await fetch(fetchURL, options);
 
       if (response.ok) {
-        let postsList = await response.json()
+        let postsList = await response.json();
 
-        dispatch(getPostsListAction(postsList.reverse()))
+        dispatch(getPostsListAction(postsList.reverse()));
         setTimeout(() => {
           dispatch(setPostsLoaded());
         }, 3000);
