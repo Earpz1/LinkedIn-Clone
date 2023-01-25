@@ -24,7 +24,7 @@ function Comments({ post }) {
 
   useEffect(() => {
     fetchComments()
-  }, commentSubmitted)
+  }, [commentSubmitted])
 
   const handleChange = (e) => {
     setComment(e.target.value)
@@ -43,7 +43,11 @@ function Comments({ post }) {
         const comments = await response.json()
         setTimeout(() => {
           setPostsComments(comments)
-          setCommentsLoaded(true)
+          if (commentsLoaded === false) {
+            setCommentsLoaded(true)
+          } else {
+            setCommentsLoaded(false)
+          }
         }, 1000)
       }
     } catch (error) {
@@ -74,6 +78,9 @@ function Comments({ post }) {
       if (response.ok) {
         const post = await response.json()
         setComment('')
+        setTimeout(() => {
+          setCommentsLoaded(true)
+        }, 1000)
         if (commentSubmitted === false) {
           setCommentSubmitted(true)
         } else {
