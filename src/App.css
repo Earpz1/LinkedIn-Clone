@@ -643,8 +643,42 @@ span {
 .commentsAvatar {
   width: 40px;
   height: 40px;
-  margin-right: 20px;
   border-radius: 50%;
+}
+
+.commentInput {
+  width: 425px;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 20px;
+  padding-left: 15px;
+  margin-left: 5px;
+  overflow-y: auto;
+}
+
+.commentBox {
+  width: 100%;
+  height: auto;
+  background-color: #e7e1e1;
+  border: white;
+  border-radius: 10px;
+}
+
+.commentName {
+  font-size: 0.9em;
+  color: #0a66c2;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.commentActions a {
+  font-size: 0.9rem;
+  color: #004182;
+  font-weight: 600;
+}
+
+.commentText {
+  font-size: 1rem;
 }
 
 .bottom-post-divider {
