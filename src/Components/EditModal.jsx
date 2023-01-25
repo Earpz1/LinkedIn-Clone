@@ -16,12 +16,19 @@ function EditModal({ data }) {
   const [title, settitle] = useState(usersData.title);
   const [bio, setbio] = useState(usersData.bio);
   const [area, setarea] = useState(usersData.area);
+  const [username, setUsername] = useState("");
+
   const [selectedFile, setselectedFile] = useState();
   const [isFilePicked, setisFilePicked] = useState(false);
 
   const changeFileHandler = (event) => {
     setselectedFile(event.target.files[0]);
     setisFilePicked(true);
+  };
+
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+    console.log(username);
   };
 
   const handleEditName = (event) => {
@@ -61,14 +68,19 @@ function EditModal({ data }) {
       name: name,
       surname: surname,
       email: email,
-      username: usersData.username,
+
       title: title,
       bio: bio,
       area: area,
       image: usersData.image,
     };
+
+    if (username !== "") {
+      user.username = username;
+    }
     console.log(user);
     console.log("We are editing users here");
+    console.log("***************", usersData);
 
     const options = {
       method: "PUT",
@@ -79,8 +91,7 @@ function EditModal({ data }) {
         //   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs',
       },
     };
-    // const fetchURL = `${process.env.REACT_APP_BE_URL}/users/63ce71322d24291c669fab27`;
-    const fetchURL = `http://localhost:3001/users/63ce71322d24291c669fab27`;
+    const fetchURL = `${process.env.REACT_APP_BE_URL}/users/63ce71322d24291c669fab27`;
     // const fetchURL = 'https://striveschool-api.herokuapp.com/api/profile/'
 
     try {
@@ -92,7 +103,7 @@ function EditModal({ data }) {
         let usersData = await response.json();
 
         if (isFilePicked) {
-          const url = `http://localhost:3001/users/${usersData._id}/picture`;
+          const url = `${process.env.REACT_APP_BE_URL}/users/${usersData._id}/picture`;
           const formData = new FormData();
           formData.append("userPicture", selectedFile);
           const config = {
@@ -152,6 +163,12 @@ function EditModal({ data }) {
               type="text"
               value={title}
               onChange={handleEditTitle}
+            />
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              value={username}
+              onChange={handleUsername}
             />
             <Form.Label>Bio</Form.Label>
             <Form.Control type="text" value={bio} onChange={handleEditBio} />
