@@ -20,11 +20,9 @@ const TopNavProfile = () => {
                 <HiUserCircle size={48} />
               </div>
               <div>
+                <p className="m-0">username</p>
                 <p className="m-0">
-                  {currentUserData.name} {currentUserData.surname}
-                </p>
-                <p className="m-0">
-                  <small>{currentUserData.title}</small>
+                  <small>Title</small>
                 </p>
               </div>
             </div>
