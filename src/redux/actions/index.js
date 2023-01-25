@@ -140,17 +140,10 @@ export const fetchExperiences = (userID) => {
   return async (dispatch, getState) => {
     console.log("We are fetching the users experiences here");
     console.log(userID);
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
-      },
-    };
     const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/users/${userID}/experiences`;
 
     try {
-      let response = await fetch(fetchURL, options);
+      let response = await fetch(fetchURL);
       if (response.ok) {
         let usersExperience = await response.json();
         dispatch(selectedExperienceAction(usersExperience));
