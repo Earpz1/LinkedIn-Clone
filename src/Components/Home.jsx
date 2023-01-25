@@ -31,7 +31,6 @@ const Home = () => {
 
   const postsList = useSelector((state) => state.posts.posts.postsList)
   const postsLoaded = useSelector((state) => state.posts.posts.postsLoaded)
-  console.log('the posts are: ', postsList)
 
   const [displayPosts, setDisplayPosts] = useState([])
   const [hasMore, setHasMore] = useState(true)
@@ -40,7 +39,7 @@ const Home = () => {
   //const profilePostsList = useSelector((state) => state.posts.posts.profilePosts.slice().reverse());
 
   const profilePosts = useSelector((state) => state.posts.posts.profilePosts)
-  console.log('the posts are: ', postsList)
+
   //console.log("the profile posts are: ", profilePostsList);
   //console.log("the profile posts are: ", reverseProfilePostsList);
 
