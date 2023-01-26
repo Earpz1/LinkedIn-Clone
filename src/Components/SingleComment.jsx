@@ -1,5 +1,21 @@
-function SingleComment({ comment }) {
-  console.log(comment)
+import { useSelector } from 'react-redux'
+
+function SingleComment({ comment, postID }) {
+  const currentUserData = useSelector((state) => state.user.currentUser)
+
+  const deleteComment = async (commentID) => {
+    const options = {
+      method: 'DELETE',
+    }
+    const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts/${postID}/comment/${commentID}`
+
+    try {
+      let response = await fetch(fetchURL, options)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="commentsList">
       <div className="d-flex comment mt-3">
@@ -16,13 +32,18 @@ function SingleComment({ comment }) {
         </div>
       </div>
       <div className="ml-5 mt-2 commentActions">
-        <a href="#" className="mr-1">
-          Like
-        </a>
-        |
-        <a href="#" className="ml-1">
-          Reply
-        </a>
+        <span className="ml-1 mr-1 commentAction">Like</span>|
+        <span className="ml-1 mr-1 commentAction">Reply</span>
+        {currentUserData._id === comment.userId._id && (
+          <span
+            className="ml-1 commentAction"
+            onClick={() => {
+              deleteComment(comment._id)
+            }}
+          >
+            | Delete
+          </span>
+        )}
       </div>
     </div>
   )

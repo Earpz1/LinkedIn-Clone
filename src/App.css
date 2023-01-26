@@ -671,10 +671,14 @@ span {
   margin-bottom: 0;
 }
 
-.commentActions a {
+.commentAction {
   font-size: 0.9rem;
   color: #004182;
   font-weight: 600;
+}
+.commentAction:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .commentText {
