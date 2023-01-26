@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 const TopNavProfile = () => {
   const navigate = useNavigate()
-  // const currentUserData = useSelector((state) => state.user.currentUser);
+  // const currentUserData = useSelector((state) => state.user.currentUser)
 
   return (
     <>

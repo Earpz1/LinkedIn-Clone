@@ -100,8 +100,8 @@ export const fetchUsers = () => {
       let response = await fetch(fetchURL);
 
       if (response.ok) {
-        let { users } = await response.json();
-        console.log(users);
+        let { users } = await response.json()
+
 
         dispatch(userSelectedAction(users.reverse()));
 
