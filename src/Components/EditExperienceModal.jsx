@@ -102,15 +102,13 @@ function EditExperienceModal(props) {
         let usersData = await response.json();
 
         if (isFilePicked) {
-          const url = `https://striveschool-api.herokuapp.com/api/profile/${usersData._id}/experiences/${props.experience._id}/picture`;
+          const url = `https://fs0422-epicode-build-week-4-production.up.railway.app/profile/${usersData._id}/experiences/${props.experience._id}/picture`;
           const formData = new FormData();
-          formData.append("experience", selectedFile);
+          formData.append("picture", selectedFile);
           const config = {
             method: "POST",
             headers: {
               "content-Type": "multipart/form-data",
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjBhOWM5NmRmYjAwMTUyMWE1YmMiLCJpYXQiOjE2NzA4MzYzOTMsImV4cCI6MTY3MjA0NTk5M30.tjYtW0usDncqSVyv5tqHhm6jzx297N87wMwUmb9BuAs",
             },
           };
           axios.post(url, formData, config).then((response) => {
