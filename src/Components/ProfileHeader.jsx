@@ -45,9 +45,19 @@ const ProfileHeader = () => {
               >
                 Add Profile Section
               </button>
-              <button id="moreBtn" className="rounded-pill bottomNavButtons">
+              <button
+                id="moreBtn"
+                className="rounded-pill bottomNavButtons mr-3"
+              >
                 More
               </button>
+              <a
+                href={`${process.env.REACT_APP_BE_URL}users/profile/${process.env.REACT_APP_MY_PROFILE_ID}/CV`}
+              >
+                <button id="moreBtn" className="rounded-pill bottomNavButtons">
+                  Get CV
+                </button>
+              </a>
             </div>
           </div>
           <div>
