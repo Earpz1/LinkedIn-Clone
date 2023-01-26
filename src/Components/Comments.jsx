@@ -117,7 +117,7 @@ function Comments({ post }) {
       )}
       {commentsLoaded &&
         postsComments.map((comment) => (
-          <SingleComment comment={comment} key={comment._id} />
+          <SingleComment comment={comment} key={comment._id} postID={postID} />
         ))}
     </div>
   )
