@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 const TopNavProfile = () => {
   const navigate = useNavigate()
-  const currentUserData = useSelector((state) => state.user.currentUser)
+  // const currentUserData = useSelector((state) => state.user.currentUser)
 
   return (
     <>
@@ -21,10 +21,10 @@ const TopNavProfile = () => {
               </div>
               <div>
                 <p className="m-0">
-                  {currentUserData.name} {currentUserData.surname}
+                  {/* {currentUserData.name} {currentUserData.surname} */}
                 </p>
                 <p className="m-0">
-                  <small>{currentUserData.title}</small>
+                  {/* <small>{currentUserData.title}</small> */}
                 </p>
               </div>
             </div>

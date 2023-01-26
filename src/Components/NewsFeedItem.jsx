@@ -11,7 +11,6 @@ import Comments from './Comments'
 
 const NewsFeedItem = ({ post }) => {
   const likes = Math.floor(Math.random() * 200)
-  console.log(post)
 
   const [Likes, setLikes] = useState(likes)
   const [liked, setliked] = useState(false)
