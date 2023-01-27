@@ -135,7 +135,7 @@ function EditModal({ data }) {
         </Button>
         <a href={`https://fs0422-epicode-build-week-4-production.up.railway.app/profile/${usersData.username}/experiences/CSV`}>
           <button id="moreBtn" className="rounded-pill bottomNavButtons">
-            Downlaod Experiences as CSV
+            Get Experiences as CSV
           </button>
         </a>
       </div>
