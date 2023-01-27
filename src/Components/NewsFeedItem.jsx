@@ -8,13 +8,23 @@ import { IoIosSend } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Comments from './Comments'
+import '@shoelace-style/shoelace/dist/themes/light.css'
+import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path'
+import { SlButton, SlDialog } from '@shoelace-style/shoelace/dist/react'
+import { useSelector } from 'react-redux'
+import { nextDay } from 'date-fns/esm'
+import { current } from '@reduxjs/toolkit'
 
 const NewsFeedItem = ({ post }) => {
-  const likes = Math.floor(Math.random() * 200)
+  setBasePath(
+    'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0/dist/',
+  )
 
-  const [Likes, setLikes] = useState(likes)
   const [liked, setliked] = useState(false)
+  const [likes, setLikes] = useState(post.likes)
   const [showComments, setshowComments] = useState(false)
+  const [open, setOpen] = useState(false)
+  const currentUserData = useSelector((state) => state.user.currentUser)
 
   const handleShowComments = () => {
     if (showComments === true) {
@@ -24,13 +34,52 @@ const NewsFeedItem = ({ post }) => {
     }
   }
 
-  const handleLikes = () => {
-    if (liked) {
-      setLikes(Likes - 1)
-      setliked(false)
+  const handleLikes = async () => {
+    const alreadyLiked = likes.some((like) => {
+      if (like._id === currentUserData._id) {
+        return true
+      }
+
+      return false
+    })
+    console.log(alreadyLiked)
+
+    if (alreadyLiked === true) {
+      const options = {
+        method: 'DELETE',
+      }
+      const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts/${post._id}/like`
+
+      try {
+        let response = await fetch(fetchURL, options)
+      } catch (error) {
+        console.log(error)
+      }
     } else {
-      setLikes(Likes + 1)
-      setliked(true)
+      const like = { userId: currentUserData._id }
+
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(like),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+
+      const fetchURL = `https://fs0422-epicode-build-week-4-production.up.railway.app/posts/${post._id}/like`
+
+      try {
+        const response = await fetch(fetchURL, options)
+        if (response.ok) {
+          console.log(`Post liked`)
+        }
+      } catch (error) {}
+    }
+  }
+
+  const showLikes = () => {
+    const options = {
+      method: 'GET',
     }
   }
 
@@ -80,10 +129,33 @@ const NewsFeedItem = ({ post }) => {
             </div>
           )}
           <div className="d-flex mt-2 ml-2 justify-content-between w-100">
-            <div>
+            <div onClick={() => setOpen(true)} className="openLikes">
               <AiFillLike className="like-icon" />
-              {Likes}
+              {post.likes.length}
             </div>
+
+            <SlDialog
+              label="Who liked your post?"
+              open={open}
+              onSlAfterHide={() => setOpen(false)}
+            >
+              {post.likes.map((like) => (
+                <div className="d-flex justify-content-between mt-3">
+                  {like.name} {like.surname}
+                  <SlButton size="small" variant="primary">
+                    Add Friend
+                  </SlButton>
+                </div>
+              ))}
+              <SlButton
+                slot="footer"
+                variant="danger"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </SlButton>
+            </SlDialog>
+
             <div>
               <div className="commentLink" onClick={handleShowComments}>
                 <small className="mr-3">

@@ -688,6 +688,11 @@ span {
   border-radius: 10px;
 }
 
+.openLikes:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .commentText {
   font-size: 1rem;
 }
