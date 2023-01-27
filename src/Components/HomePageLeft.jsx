@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
-import { IoMdPersonAdd } from "react-icons/io";
-import { BsFillBookmarkFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { IoMdPersonAdd } from 'react-icons/io'
+import { BsFillBookmarkFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 const HomePageLeft = () => {
-  const currentUserData = useSelector((state) => state.user.currentUser);
+  const currentUserData = useSelector((state) => state.user.currentUser)
 
   return (
     <>
-      <div className="left-feed-box">
+      <div className="left-feed-box mr-4">
         <div id="top-left-home">
           <div id="top-left-home-backgroundImage"></div>
           <div id="top-left-home-userprofile-pic">
@@ -21,7 +21,7 @@ const HomePageLeft = () => {
         </div>
         <div id="top-left-home-bottom" className="text-center">
           <h6 className="m-0">Welcome, {currentUserData.name}!</h6>
-          <a href="#" style={{ fontSize: "10pt" }}>
+          <a href="#" style={{ fontSize: '10pt' }}>
             Add a photo
           </a>
           <div className="top-left-line-breaks my-2"></div>
@@ -30,7 +30,7 @@ const HomePageLeft = () => {
               <div className="top-left-home-section d-flex justify-content-between">
                 <div className="text-left pl-3">
                   <p className="m-0">Connections</p>
-                  <p className="m-0" style={{ color: "black" }}>
+                  <p className="m-0" style={{ color: 'black' }}>
                     Grow your network
                   </p>
                 </div>
@@ -47,7 +47,7 @@ const HomePageLeft = () => {
             <div>
               <p
                 className="m-0"
-                style={{ color: "gray", fontSize: "10pt", width: "175px" }}
+                style={{ color: 'gray', fontSize: '10pt', width: '175px' }}
               >
                 Access exclusive tools & insights
               </p>
@@ -60,23 +60,23 @@ const HomePageLeft = () => {
             </div>
           </div>
         </Link>
-        <Link style={{ textDecoration: "none" }}>
+        <Link style={{ textDecoration: 'none' }}>
           <div className="top-left-line-breaks my-0 "></div>
           <div className="d-flex px-3 py-3 top-left-direct-link">
             <div
               className="d-flex align-items-center"
-              style={{ color: "#5E5E5E" }}
+              style={{ color: '#5E5E5E' }}
             >
               <BsFillBookmarkFill />
             </div>
-            <p className="m-0 pl-2" style={{ color: "black" }}>
+            <p className="m-0 pl-2" style={{ color: 'black' }}>
               My items
             </p>
           </div>
         </Link>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default HomePageLeft;
+export default HomePageLeft
