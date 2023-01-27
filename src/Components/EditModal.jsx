@@ -127,29 +127,17 @@ function EditModal({ data }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleCSVdownload = async () => {
-    try {
-      const options = {
-        method: "GET",
-      };
-      const response = await fetch(`http://localhost:3001/profile/${usersData.username}/experiences/CSV`, options);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Downloading...", data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
-      <div className="d-flex">
+      <div className="d-flex align-items-center">
         <Button id="editButton" onClick={handleShow}>
           <BsPencil size={20} />
         </Button>
-
-        {/* <Button onClick={handleCSVdownload}>Downlaod CSV format</Button> */}
+        <a href={`https://fs0422-epicode-build-week-4-production.up.railway.app/profile/${usersData.username}/experiences/CSV`}>
+          <button id="moreBtn" className="rounded-pill bottomNavButtons">
+            Downlaod Experiences as CSV
+          </button>
+        </a>
       </div>
 
       <Modal show={show} onHide={handleClose}>
